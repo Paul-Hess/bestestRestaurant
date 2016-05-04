@@ -16,9 +16,9 @@ public class CuisineTest {
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
       String deleteCuisinesQuery = "DELETE FROM cuisines *;";
-      // String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
+      String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
       con.createQuery(deleteCuisinesQuery).executeUpdate();
-      // con.createQuery(deleteRestaurantsQuery).executeUpdate();
+      con.createQuery(deleteRestaurantsQuery).executeUpdate();
     }
   }
 
@@ -42,11 +42,6 @@ public class CuisineTest {
     assertEquals(myCuisine.getUpdatedAt().getHours(), testCreatedAt.getHours());
   }
 
-  @Test
-  public void save_returnsCuisineName_greasy(){
-    Cuisine myCuisine = new Cuisine("greasy");
-    assertEquals(myCuisine.getName(), "greasy");
-  }
 
   @Test
   public void equals_returnsTrueIfDescriptionsAretheSame() {

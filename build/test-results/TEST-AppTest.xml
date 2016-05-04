@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AppTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-05-04T17:48:21" hostname="epicodus-42.local" time="0.388">
+<testsuite name="AppTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-05-04T18:34:17" hostname="epicodus-42.local" time="0.393">
   <properties/>
-  <testcase name="rootTest" classname="AppTest" time="0.388"/>
+  <testcase name="rootTest" classname="AppTest" time="0.393"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[[Thread-4] INFO org.eclipse.jetty.util.log - Logging initialized @651ms
+  <system-err><![CDATA[[Thread-4] INFO org.eclipse.jetty.util.log - Logging initialized @667ms
 [Thread-4] INFO spark.webserver.JettySparkServer - == Spark has ignited ...
 [Thread-4] INFO spark.webserver.JettySparkServer - >> Listening on 0.0.0.0:4567
 [Thread-4] INFO org.eclipse.jetty.server.Server - jetty-9.3.2.v20150730
-[Thread-4] INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@43e5693d{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
-[Thread-4] INFO org.eclipse.jetty.server.Server - Started @743ms
-May 04, 2016 10:48:21 AM org.apache.velocity log
+[Thread-4] INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@5bb9d276{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+[Thread-4] INFO org.eclipse.jetty.server.Server - Started @785ms
+May 04, 2016 11:34:18 AM org.apache.velocity log
 SEVERE: ResourceManager : unable to find resource 'templates/home.vtl' in any resource loader.
-May 04, 2016 10:48:21 AM org.apache.velocity log
+May 04, 2016 11:34:18 AM org.apache.velocity log
 SEVERE: #parse(): cannot find template 'templates/home.vtl', called at templates/layout.vtl[line 12, column 5]
-[qtp1820162951-18] ERROR spark.webserver.MatcherFilter - 
+[qtp868147966-18] ERROR spark.webserver.MatcherFilter - 
 org.apache.velocity.exception.ResourceNotFoundException: Unable to find resource 'templates/home.vtl'
 	at org.apache.velocity.runtime.resource.ResourceManagerImpl.loadResource(ResourceManagerImpl.java:474)
 	at org.apache.velocity.runtime.resource.ResourceManagerImpl.getResource(ResourceManagerImpl.java:352)
@@ -45,7 +45,7 @@ org.apache.velocity.exception.ResourceNotFoundException: Unable to find resource
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:572)
 	at java.lang.Thread.run(Thread.java:745)
 [Test worker] INFO spark.webserver.JettySparkServer - >>> Spark shutting down ...
-[Test worker] INFO org.eclipse.jetty.server.ServerConnector - Stopped ServerConnector@43e5693d{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+[Test worker] INFO org.eclipse.jetty.server.ServerConnector - Stopped ServerConnector@5bb9d276{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
 [Test worker] INFO spark.webserver.JettySparkServer - done
 ]]></system-err>
 </testsuite>
