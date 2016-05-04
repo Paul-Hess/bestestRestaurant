@@ -45,11 +45,41 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("bestestRest ...aurants!");
   }
 
+  @Test
   public void createCuisine() {
     goTo("http://localhost:4567/");
     fill("#cuisine-name").with("greasy");
-    submit("cuisine-btn");
+    submit("#cuisine-btn");
     assertThat(pageSource()).contains("greasy");
+  }
+
+  @Test
+  public void viewCuisine() {
+    goTo("http://localhost:4567/");
+    fill("#cuisine-name").with("greasy");
+    submit("#cuisine-btn");
+    click("a", withText("greasy"));
+    assertThat(pageSource()).contains("greasy restaurants:");
+  }
+
+  @Test
+  public void listRestaurants() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    Restaurant greezyGrill = new Restaurant("greezyGrill", greasy.getId());
+    greezyGrill.save();
+    goTo("http://localhost:4567/cuisines/" + greasy.getId());
+    assertThat(pageSource()).contains("greezyGrill");
+  }
+
+  @Test
+  public void viewRestaurants() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    Restaurant greezyGrill = new Restaurant("greezyGrill", greasy.getId());
+    greezyGrill.save();
+    goTo("http://localhost:4567/cuisines/" + greasy.getId() + "/restaurants/" + greezyGrill.getId());
+    assertThat(pageSource()).contains("greezyGrill");
   }
 
 

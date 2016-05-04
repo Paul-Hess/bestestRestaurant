@@ -1,7 +1,7 @@
 #if($cuisines)
   <ul>
   #foreach($cuisine in $cuisines)
-    <li><a href="/cuisine/$cuisine.getId()">$cuisine.getName()</a></li>
+    <li><a href="/cuisines/$cuisine.getId()">$cuisine.getName()</a></li>
   #end
   </ul>
 #end
@@ -12,5 +12,5 @@
   <label for="cuisine-name">cuisine type: </label>
   <input type="test" name="cuisine-name" id="cuisine-name" >
 
-  <button type="submit" class="cuisine-btn">submit</button>
+  <button type="submit" id="cuisine-btn">submit</button>
 </form>

@@ -57,6 +57,15 @@ public class Cuisine {
     }
   }
 
+  public List<Restaurant> restaurantList() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id, restaurantName, createdAt, updatedAt, cuisineId FROM restaurants WHERE cuisineId=:cuisineId";
+     return con.createQuery(sql)
+        .addParameter("cuisineId", this.id)
+        .executeAndFetch(Restaurant.class);
+    }
+  }
+
 
   //UPDATE update()
   public void updateName(String newName){
