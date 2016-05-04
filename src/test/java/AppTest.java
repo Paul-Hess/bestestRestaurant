@@ -6,6 +6,10 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import org.junit.*;
+import static org.junit.Assert.*;
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest extends FluentTest {
@@ -27,7 +31,7 @@ public class AppTest extends FluentTest {
     try(Connection con = DB.sql2o.open()) {
       String deleteCuisinesQuery = "DELETE FROM cuisines *;";
       // String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
-      con.createQuery(deleteCuisineQuery).executeUpdate();
+      con.createQuery(deleteCuisinesQuery).executeUpdate();
       // con.createQuery(deleteRestaurantsQuery).executeUpdate();
     }
   }
