@@ -71,6 +71,25 @@ public class Restaurant {
     }
   }
 
+  //UPDATE update()
+  public void updateName(String newName){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE restaurants SET restaurantName = :restaurantName WHERE id=:id";
+       con.createQuery(sql)
+        .addParameter("id", id)
+        .addParameter("restaurantName", newName)
+        .executeUpdate();
+    }
+  }
+
+
+  //DELETE remove()
+  public void remove() {
+    try( Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM restaurants WHERE id=:id";
+      con.createQuery(sql).addParameter("id", id).executeUpdate();
+    }
+  }
 
   public int getRating(){
     return rating;

@@ -65,11 +65,19 @@ public class CuisineTest {
   }
 
   @Test
-  public void update_returnsTrueIfNamessAretheSame_Cuisine() {
+  public void updateName_returnsTrueIfNamessAretheSame_Cuisine() {
     Cuisine testCuisine = new Cuisine("greasy");
     testCuisine.save();
-    testCuisine.update("luxemborgian");
+    testCuisine.updateName("luxemborgian");
     assertEquals(Cuisine.find(testCuisine.getId()).getName(), "luxemborgian");
+  }
+
+  @Test
+  public void remove_deletesSpecificInstanceOfCuisine_deleted() {
+    Cuisine testCuisine = new Cuisine("greasy");
+    testCuisine.save();
+    testCuisine.remove();
+    assertEquals(Cuisine.all().size(), 0);
   }
 
 }

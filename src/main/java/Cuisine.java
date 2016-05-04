@@ -59,7 +59,7 @@ public class Cuisine {
 
 
   //UPDATE update()
-  public void update(String newName){
+  public void updateName(String newName){
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE cuisines SET cuisineName = :cuisineName WHERE id=:id";
        con.createQuery(sql)
@@ -71,7 +71,12 @@ public class Cuisine {
 
 
   //DELETE remove()
-
+  public void remove() {
+    try( Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM cuisines WHERE id=:id";
+      con.createQuery(sql).addParameter("id", id).executeUpdate();
+    }
+  }
 
   public int getId(){
     return id;

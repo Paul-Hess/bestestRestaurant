@@ -75,4 +75,19 @@ public class RestaurantTest {
     assertTrue(Restaurant.findByName(testRestaurant.getName()).equals(testRestaurant));
   }
 
+  @Test
+  public void updateName_returnsTrueIfNamessAretheSame_Restaurant() {
+    Restaurant testRestaurant = new Restaurant("greasy", 0);
+    testRestaurant.save();
+    testRestaurant.updateName("luxemborgian");
+    assertEquals(Restaurant.findById(testRestaurant.getId()).getName(), "luxemborgian");
+  }
+
+  @Test
+  public void remove_deletesSpecificInstanceOfRestaurant_deleted() {
+    Restaurant testRestaurant = new Restaurant("greasy", 0);
+    testRestaurant.save();
+    testRestaurant.remove();
+    assertEquals(Restaurant.all().size(), 0);
+  }
 }
