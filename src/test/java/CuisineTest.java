@@ -2,7 +2,8 @@
 import org.junit.*;
 import org.sql2o.*;
 import static org.junit.Assert.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class CuisineTest {
 
@@ -28,8 +29,44 @@ public class CuisineTest {
   }
 
   @Test
-  public void getName_returnsCuisineName_true(){
+  public void getName_returnsCuisineName_greasy(){
     Cuisine myCuisine = new Cuisine("greasy");
     assertEquals(myCuisine.getName(), "greasy");
   }
+
+  @Test
+  public void getCreatedAtAndgetUpdatedAt_returnTimestamps_hours(){
+    Cuisine myCuisine = new Cuisine("greasy");
+    Timestamp testCreatedAt = new Timestamp(new Date().getTime());
+    assertEquals(myCuisine.getCreatedAt().getHours(), testCreatedAt.getHours());
+    assertEquals(myCuisine.getUpdatedAt().getHours(), testCreatedAt.getHours());
+  }
+
+  @Test
+  public void save_returnsCuisineName_greasy(){
+    Cuisine myCuisine = new Cuisine("greasy");
+    assertEquals(myCuisine.getName(), "greasy");
+  }
+
+  @Test
+  public void equals_returnsTrueIfDescriptionsAretheSame() {
+    Cuisine firstCuisine = new Cuisine("greasy");
+    Cuisine secondCuisine = new Cuisine("greasy");
+    assertTrue(firstCuisine.equals(secondCuisine));
+  }
+
+  @Test
+  public void save_returnsTrueIfDescriptionsAretheSame_Cuisine() {
+    Cuisine testCuisine = new Cuisine("greasy");
+    testCuisine.save();
+    assertTrue(Cuisine .all().get(0).equals(testCuisine));
+  }
+
+  @Test
+  public void find_returnsCorrectCuisineSearchedFor_Cuisine() {
+    Cuisine testCuisine = new Cuisine("greasy");
+    testCuisine.save();
+    assertEquals(Cuisine.find(testCuisine.getId()), testCuisine);
+  }
+
 }
