@@ -1,0 +1,16 @@
+#if($cuisines)
+  <ul>
+  #foreach($cuisine in $cuisines)
+    <li><a href="/cuisine/$cuisine.getId()">$cuisine.getName()</a></li>
+  #end
+  </ul>
+#end
+
+<h4>add a new cuisine: </h4>
+<form  action="/" method="post">
+
+  <label for="cuisine-name">cuisine type: </label>
+  <input type="test" name="cuisine-name" id="cuisine-name" >
+
+  <button type="submit" class="cuisine-btn">submit</button>
+</form>

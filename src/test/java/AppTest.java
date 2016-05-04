@@ -30,9 +30,9 @@ public class AppTest extends FluentTest {
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
       String deleteCuisinesQuery = "DELETE FROM cuisines *;";
-      // String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
+      String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
       con.createQuery(deleteCuisinesQuery).executeUpdate();
-      // con.createQuery(deleteRestaurantsQuery).executeUpdate();
+      con.createQuery(deleteRestaurantsQuery).executeUpdate();
     }
   }
 
@@ -42,6 +42,15 @@ public class AppTest extends FluentTest {
   @Test
   public void rootTest() {
     goTo("http://localhost:4567/");
+    assertThat(pageSource()).contains("bestestRest ...aurants!");
   }
+
+  public void createCuisine() {
+    goTo("http://localhost:4567/");
+    fill("#cuisine-name").with("greasy");
+    submit("cuisine-btn");
+    assertThat(pageSource()).contains("greasy");
+  }
+
 
 }
