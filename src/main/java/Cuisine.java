@@ -59,6 +59,16 @@ public class Cuisine {
 
 
   //UPDATE update()
+  public void update(String newName){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE cuisines SET cuisineName = :cuisineName WHERE id=:id";
+       con.createQuery(sql)
+        .addParameter("id", id)
+        .addParameter("cuisineName", newName)
+        .executeUpdate();
+    }
+  }
+
 
   //DELETE remove()
 

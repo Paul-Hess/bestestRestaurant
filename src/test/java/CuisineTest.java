@@ -51,7 +51,7 @@ public class CuisineTest {
   }
 
   @Test
-  public void save_returnsTrueIfDescriptionsAretheSame_Cuisine() {
+  public void save_returnsTrueIfNamesAretheSame_Cuisine() {
     Cuisine testCuisine = new Cuisine("greasy");
     testCuisine.save();
     assertTrue(Cuisine .all().get(0).equals(testCuisine));
@@ -62,6 +62,14 @@ public class CuisineTest {
     Cuisine testCuisine = new Cuisine("greasy");
     testCuisine.save();
     assertEquals(Cuisine.find(testCuisine.getId()), testCuisine);
+  }
+
+  @Test
+  public void update_returnsTrueIfNamessAretheSame_Cuisine() {
+    Cuisine testCuisine = new Cuisine("greasy");
+    testCuisine.save();
+    testCuisine.update("hadjshsa");
+    assertTrue(Cuisine.all().get(0).equals(testCuisine));
   }
 
 }

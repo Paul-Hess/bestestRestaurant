@@ -72,7 +72,7 @@ public class RestaurantTest {
   public void findByName_returnsCorrectRestaurantSearchedFor_Restaurant() {
     Restaurant testRestaurant = new Restaurant("greasy", 0);
     testRestaurant.save();
-    assertEquals(Restaurant.findByName(testRestaurant.getName()), testRestaurant);
+    assertTrue(Restaurant.findByName(testRestaurant.getName()).equals(testRestaurant));
   }
 
 }
