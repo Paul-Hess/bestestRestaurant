@@ -68,8 +68,8 @@ public class CuisineTest {
   public void update_returnsTrueIfNamessAretheSame_Cuisine() {
     Cuisine testCuisine = new Cuisine("greasy");
     testCuisine.save();
-    testCuisine.update("hadjshsa");
-    assertTrue(Cuisine.all().get(0).equals(testCuisine));
+    testCuisine.update("luxemborgian");
+    assertEquals(Cuisine.find(testCuisine.getId()).getName(), "luxemborgian");
   }
 
 }
