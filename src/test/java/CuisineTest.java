@@ -65,10 +65,10 @@ public class CuisineTest {
   }
 
   @Test
-  public void updateName_returnsTrueIfNamessAretheSame_Cuisine() {
+  public void update_returnsTrueIfNamessAretheSame_Cuisine() {
     Cuisine testCuisine = new Cuisine("greasy");
     testCuisine.save();
-    testCuisine.updateName("luxemborgian");
+    testCuisine.update("cuisineName", "luxemborgian");
     assertEquals(Cuisine.find(testCuisine.getId()).getName(), "luxemborgian");
   }
 
@@ -76,8 +76,12 @@ public class CuisineTest {
   public void remove_deletesSpecificInstanceOfCuisine_deleted() {
     Cuisine testCuisine = new Cuisine("greasy");
     testCuisine.save();
+    Restaurant firstRestaurant = new Restaurant("greasy", testCuisine.getId());
+    Restaurant secondRestaurant = new Restaurant("greasy", testCuisine.getId());
     testCuisine.remove();
+
     assertEquals(Cuisine.all().size(), 0);
+    assertEquals(Restaurant.all().size(), 0);
   }
 
 }

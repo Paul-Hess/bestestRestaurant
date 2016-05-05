@@ -76,10 +76,10 @@ public class RestaurantTest {
   }
 
   @Test
-  public void updateName_returnsTrueIfNamessAretheSame_Restaurant() {
+  public void update_returnsTrueIfNamessAretheSame_Restaurant() {
     Restaurant testRestaurant = new Restaurant("greasy", 0);
     testRestaurant.save();
-    testRestaurant.updateName("luxemborgian");
+    testRestaurant.update("restaurantname", "luxemborgian");
     assertEquals(Restaurant.findById(testRestaurant.getId()).getName(), "luxemborgian");
   }
 

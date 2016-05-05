@@ -1,1 +1,8 @@
 <h1> $restaurant.getName() </h1>
+
+<form method="post" action="/restaurant/$restaurant.getId()/edit">
+  <!-- route to this page -->
+  <input type="text" id="changeName" name="changeName">
+
+  <button type="submit">change that name.</button>
+</form>

@@ -68,12 +68,12 @@ public class Cuisine {
 
 
   //UPDATE update()
-  public void updateName(String newName){
+  public void update(String thingToUpdate, String newValue){
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE cuisines SET cuisineName = :cuisineName WHERE id=:id";
+      String sql = String.format("UPDATE cuisines SET %s = :%s WHERE id=:id",thingToUpdate,thingToUpdate);
        con.createQuery(sql)
         .addParameter("id", id)
-        .addParameter("cuisineName", newName)
+        .addParameter(thingToUpdate, newValue)
         .executeUpdate();
     }
   }
@@ -81,6 +81,10 @@ public class Cuisine {
 
   //DELETE remove()
   public void remove() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM restaurants WHERE cuisineId=:id";
+      con.createQuery(sql).addParameter("id", id).executeUpdate();
+    }
     try( Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM cuisines WHERE id=:id";
       con.createQuery(sql).addParameter("id", id).executeUpdate();

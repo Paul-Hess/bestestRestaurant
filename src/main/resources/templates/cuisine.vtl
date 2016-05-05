@@ -1,9 +1,18 @@
 <h1>$cuisine.getName() restaurants:</h1>
+<form method="post" action="/cuisines/$cuisine.getId()/edit">
+  <!-- route to this page -->
+  <input type="text" id="changeCusineName" name="changeCusineName">
+
+  <button type="submit">change that cuisine name.</button>
+</form>
 
 #if($restaurants)
   <ul>
   #foreach($restaurant in $restaurants)
     <li><a href="/cuisines/$cuisine.getId()/restaurants/$restaurant.getId()">$restaurant.getName()</a></li>
+    <form  action="/cuisines/restaurant/$restaurant.getId()/delete" method="post">
+      <button type="submit">remove</button>
+    </form>
   #end
   </ul>
 #end

@@ -10,7 +10,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class AppTest extends FluentTest {
   public WebDriver webDriver = new HtmlUnitDriver();
@@ -73,7 +73,7 @@ public class AppTest extends FluentTest {
   }
 
   @Test
-  public void viewRestaurants() {
+  public void viewRestaurant() {
     Cuisine greasy = new Cuisine("greasy");
     greasy.save();
     Restaurant greezyGrill = new Restaurant("greezyGrill", greasy.getId());
@@ -82,5 +82,47 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("greezyGrill");
   }
 
+  @Test
+  public void deleteRestaurants() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    Restaurant jimmysFishSticks = new Restaurant("jimmysFishSticks", greasy.getId());
+    jimmysFishSticks.save();
+    goTo("http://localhost:4567/cuisines/" + greasy.getId());
+    submit("button", withText("remove"));
+    assertThat(pageSource()).contains("greasy");
+    assertThat(pageSource()).doesNotContain("jimmysFishSticks");
+  }
+
+  @Test
+  public void updateRestaurant() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    Restaurant greezyGrill = new Restaurant("greezyGrill", greasy.getId());
+    greezyGrill.save();
+    goTo("http://localhost:4567/cuisines/" + greasy.getId() + "/restaurants/" + greezyGrill.getId());
+    fill("#changeName").with("jimmysFishSticks");
+    submit("button", withText("change"));
+    assertThat(pageSource()).contains("jimmysFishSticks");
+  }
+
+  @Test
+  public void deleteCuisines() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    goTo("http://localhost:4567/");
+    submit("button", withText("remove cuisine and the restaurants that fit it."));
+    assertThat(pageSource()).doesNotContain("greasy");
+  }
+
+  @Test
+  public void updateCuisine() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    goTo("http://localhost:4567/cuisines/" + greasy.getId());
+    fill("#changeCusineName").with("Fish Sticks");
+    submit("button", withText("change that cuisine name."));
+    assertThat(pageSource()).contains("Fish Sticks");
+  }
 
 }

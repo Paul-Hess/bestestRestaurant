@@ -64,5 +64,50 @@ public class App {
       model.put("template", "templates/restaurant.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/cuisines/restaurant/:restaurant_Id/delete",(req, res) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(req.params("restaurant_id"));
+      Restaurant currentRestaurant = Restaurant.findById(id);
+      int thisRestrauntsCuisine = currentRestaurant.getCuisineId();
+      currentRestaurant.remove();
+      res.redirect("/cuisines/" + thisRestrauntsCuisine);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/restaurant/:restaurant_id/edit",(req, res) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(req.params("restaurant_id"));
+      Restaurant currentRestaurant = Restaurant.findById(id);
+      int thisRestrauntsCuisine = currentRestaurant.getCuisineId();
+      String newName = req.queryParams("changeName");
+      currentRestaurant.update("restaurantName", newName);
+
+      res.redirect(String.format("/cuisines/%s/restaurants/%s", thisRestrauntsCuisine, id));
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/cuisines/:cuisine_id/delete",(req, res) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(req.params("cuisine_id"));
+      Cuisine currentCuisine = Cuisine.find(id);
+      currentCuisine.remove();
+      res.redirect("/");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/cuisines/:cuisine_id/edit",(req, res) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(req.params("cuisine_id"));
+      Cuisine currentCuisine = Cuisine.find(id);
+
+
+      String newName = req.queryParams("changeCusineName");
+      currentCuisine.update("cuisineName", newName);
+
+      res.redirect(String.format("/cuisines/%s", id));
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
