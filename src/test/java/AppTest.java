@@ -31,8 +31,10 @@ public class AppTest extends FluentTest {
     try(Connection con = DB.sql2o.open()) {
       String deleteCuisinesQuery = "DELETE FROM cuisines *;";
       String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
+      // String deleteReviewsQuery = "DELETE FROM reviews *;";
       con.createQuery(deleteCuisinesQuery).executeUpdate();
       con.createQuery(deleteRestaurantsQuery).executeUpdate();
+      // con.createQuery(deleteReviewsQuery).executeUpdate();
     }
   }
 

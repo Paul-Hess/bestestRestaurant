@@ -17,8 +17,10 @@ public class CuisineTest {
     try(Connection con = DB.sql2o.open()) {
       String deleteCuisinesQuery = "DELETE FROM cuisines *;";
       String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
+      String deleteReviewsQuery = "DELETE FROM reviews *;";
       con.createQuery(deleteCuisinesQuery).executeUpdate();
       con.createQuery(deleteRestaurantsQuery).executeUpdate();
+      con.createQuery(deleteReviewsQuery).executeUpdate();
     }
   }
 
@@ -82,6 +84,15 @@ public class CuisineTest {
 
     assertEquals(Cuisine.all().size(), 0);
     assertEquals(Restaurant.all().size(), 0);
+  }
+
+  @Test
+  public void getRestaurants_returnAllRestaurantsForInstanceOfRestaurant_List() {
+    Cuisine testCuisine = new Cuisine("greasy");
+    testCuisine.save();
+    Restaurant testRestaurant = new Restaurant("greasy", testCuisine.getId());
+    testRestaurant.save();
+    assertEquals(testCuisine.restaurantList().get(0), testRestaurant);
   }
 
 }

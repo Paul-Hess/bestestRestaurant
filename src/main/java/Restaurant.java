@@ -20,6 +20,15 @@ public class Restaurant {
     updatedAt = new Timestamp(new Date().getTime());
   }
 
+  public List<Review> reviewList() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM reviews WHERE restaurantId=:id";
+     return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Review.class);
+    }
+  }
+
   public void save(){
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO restaurants ( restaurantName, rating, createdAt, updatedAt,  cuisineId) VALUES ( :restaurantName, :rating, :createdAt, :updatedAt, :cuisineId)";
