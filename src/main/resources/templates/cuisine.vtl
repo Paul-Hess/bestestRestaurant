@@ -7,6 +7,7 @@
 </form>
 
 #if($restaurants)
+  <p>Restaurant(s): </p>
   <ul>
   #foreach($restaurant in $restaurants)
     <li><a href="/cuisines/$cuisine.getId()/restaurants/$restaurant.getId()">$restaurant.getName()</a></li>

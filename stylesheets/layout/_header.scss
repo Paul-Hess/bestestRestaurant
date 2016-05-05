@@ -1,3 +1,13 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
+.headers {
+  width: 90vw;
+  height: 10vh;
+  background: rgba(0, 0, 0, .6);
+  color: white;
+  margin: auto;
+  text-align: center;
+  text-shadow: 1px 1px 15px black;
+  
+}

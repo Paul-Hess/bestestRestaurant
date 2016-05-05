@@ -20,9 +20,14 @@ public class Restaurant {
     updatedAt = new Timestamp(new Date().getTime());
   }
 
+  // future implementation will set this as average rating from reviews associated with this restaurant.
+  public void setAverageRating(int newRating) {
+    this.rating = newRating;
+  }
+
   public List<Review> reviewList(String thingToOrderBy) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = String.format("SELECT * FROM reviews WHERE restaurantId=:id ORDER BY %s desc", thingToOrderBy);
+      String sql = String.format("SELECT * FROM reviews WHERE restaurantId=:id ORDER BY %s asc", thingToOrderBy);
      return con.createQuery(sql)
         .addParameter("id", this.id)
         .executeAndFetch(Review.class);
@@ -94,6 +99,10 @@ public class Restaurant {
 
   //DELETE remove()
   public void remove() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM reviews WHERE restaurantId=:id";
+      con.createQuery(sql).addParameter("id", id).executeUpdate();
+    }
     try( Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM restaurants WHERE id=:id";
       con.createQuery(sql).addParameter("id", id).executeUpdate();
@@ -124,8 +133,5 @@ public class Restaurant {
     return createdAt;
   }
 
-  // future implementation will set this as average rating from reviews associated with this restaurant.
-  public void setAverageRating(int newRating) {
-    this.rating = newRating;
-  }
+
 }

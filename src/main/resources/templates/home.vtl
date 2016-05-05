@@ -9,6 +9,7 @@
 
 
 #if($cuisines)
+  <p>Cuisine(s): </p>
   <ul>
   #foreach($cuisine in $cuisines)
     <li><a href="/cuisines/$cuisine.getId()">$cuisine.getName()</a></li>

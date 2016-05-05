@@ -21,7 +21,15 @@
 </form>
 
 #if($reviews)
-  <p>
+  <p>Review(s):
+
+  <form class="orderBy" action="/restaurant/$restaurant.getId()/order" method="post">
+    <button type="submit" name="orderByButton">ORDER BY</button>
+    <select name="howToOrder">
+      <option value="reviewRating">rating</option>
+      <option value="createdAt">newest</option>
+    </select>
+  </form>
   #foreach( $review in $reviews)
    <span>$review.getReviewBody()</span>
   #end

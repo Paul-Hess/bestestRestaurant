@@ -80,10 +80,28 @@ public class App {
       int id = Integer.parseInt(req.params("restaurant_id"));
       Restaurant currentRestaurant = Restaurant.findById(id);
       if(currentRestaurant.reviewList("reviewRating").size() > 0) {
-        model.put("reviews", currentRestaurant.reviewList("reviewRating"));
+        String order = req.session().attribute("order");
+        if (order != null){
+          model.put("reviews", currentRestaurant.reviewList(order));
+        } else {
+          model.put("reviews", currentRestaurant.reviewList("reviewRating"));
+        }
       }
       model.put("restaurant", currentRestaurant);
       model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/restaurant/:restaurant_id/order", (req, res) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(req.params("restaurant_id"));
+      Restaurant currentRestaurant = Restaurant.findById(id);
+      int thisRestrauntsCuisine = currentRestaurant.getCuisineId();
+
+      String order = req.queryParams("howToOrder");
+      currentRestaurant.reviewList(order);
+      req.session().attribute("order", order);
+      res.redirect(String.format("/cuisines/%s/restaurants/%s",thisRestrauntsCuisine,id));
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
