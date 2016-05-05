@@ -39,3 +39,9 @@ Thumbs.db
 ########
 build/
 .gradle/
+
+
+# Sass #
+#########
+.sass-cache/
+.sass-cache
