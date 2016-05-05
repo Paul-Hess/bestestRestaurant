@@ -1,8 +1,29 @@
 <h1> $restaurant.getName() </h1>
 
 <form method="post" action="/restaurant/$restaurant.getId()/edit">
-  <!-- route to this page -->
+  <!-- route to this vtl -->
   <input type="text" id="changeName" name="changeName">
 
   <button type="submit">change that name.</button>
 </form>
+
+
+<h1>ADD review</h1>
+<form method="post" action="/restaurant/$restaurant.getId()/newReview">
+  <!-- route to this vtl -->
+  <label for="addReviewBodyIn">review:
+  <input type="text" id="addReviewBodyIn" name="addReviewBodyIn"></label>
+
+  <label for="addReviewRatingIn">rating:
+  <input type="number" id="addReviewRatingIn" name="addReviewRatingIn"></label>
+
+  <button type="submit">add review.</button>
+</form>
+
+#if($reviews)
+  <p>
+  #foreach( $review in $reviews)
+   <span>$review.getReviewBody()</span>
+  #end
+  </p>
+#end

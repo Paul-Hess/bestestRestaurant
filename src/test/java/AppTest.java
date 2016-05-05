@@ -31,10 +31,10 @@ public class AppTest extends FluentTest {
     try(Connection con = DB.sql2o.open()) {
       String deleteCuisinesQuery = "DELETE FROM cuisines *;";
       String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
-      // String deleteReviewsQuery = "DELETE FROM reviews *;";
+      String deleteReviewsQuery = "DELETE FROM reviews *;";
       con.createQuery(deleteCuisinesQuery).executeUpdate();
       con.createQuery(deleteRestaurantsQuery).executeUpdate();
-      // con.createQuery(deleteReviewsQuery).executeUpdate();
+      con.createQuery(deleteReviewsQuery).executeUpdate();
     }
   }
 
@@ -46,6 +46,33 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/");
     assertThat(pageSource()).contains("bestestRest ...aurants!");
   }
+
+  @Test
+  public void viewsReviewTest() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    Restaurant greezyGrill = new Restaurant("greezyGrill", greasy.getId());
+    greezyGrill.save();
+    Review testReview = new Review("test review", 4, greezyGrill.getId());
+    testReview.save();
+    goTo("http://localhost:4567/cuisines/" + greasy.getId() + "/restaurants/" + greezyGrill.getId());
+    assertThat(pageSource()).contains("test review");
+  }
+
+  @Test
+  public void createReviewTest() {
+    Cuisine greasy = new Cuisine("greasy");
+    greasy.save();
+    Restaurant greezyGrill = new Restaurant("greezyGrill", greasy.getId());
+    greezyGrill.save();
+    goTo("http://localhost:4567/cuisines/" + greasy.getId() + "/restaurants/" + greezyGrill.getId());
+    fill("#addReviewBodyIn").with("test review");
+    fill("#addReviewRatingIn").with("5");
+    submit("button", withText("add review."));
+    assertThat(pageSource()).contains("test review");
+  }
+
+
 
   @Test
   public void createCuisine() {

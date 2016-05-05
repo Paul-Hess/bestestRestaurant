@@ -20,9 +20,9 @@ public class Restaurant {
     updatedAt = new Timestamp(new Date().getTime());
   }
 
-  public List<Review> reviewList() {
+  public List<Review> reviewList(String thingToOrderBy) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM reviews WHERE restaurantId=:id";
+      String sql = String.format("SELECT * FROM reviews WHERE restaurantId=:id ORDER BY %s desc", thingToOrderBy);
      return con.createQuery(sql)
         .addParameter("id", this.id)
         .executeAndFetch(Review.class);

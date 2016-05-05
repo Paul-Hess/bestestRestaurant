@@ -99,6 +99,6 @@ public class RestaurantTest {
     testRestaurant.save();
     Review testReview = new Review("greasy review", 3, testRestaurant.getId());
     testReview.save();
-    assertEquals(testRestaurant.reviewList().get(0), testReview);
+    assertEquals(testRestaurant.reviewList("reviewRating").get(0), testReview);
   }
 }
